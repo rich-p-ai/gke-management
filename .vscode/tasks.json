@@ -1,0 +1,28 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "gcloud auth login",
+      "type": "shell",
+      "command": "gcloud auth login",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Get GKE Credentials",
+      "type": "shell",
+      "command": "gcloud container clusters get-credentials <CLUSTER_NAME> --region <REGION> --project <PROJECT_ID>",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "kubectl get pods",
+      "type": "shell",
+      "command": "kubectl get pods",
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
+}
