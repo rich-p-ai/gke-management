@@ -13,16 +13,137 @@
     {
       "label": "Get GKE Credentials",
       "type": "shell",
-      "command": "gcloud container clusters get-credentials <CLUSTER_NAME> --region <REGION> --project <PROJECT_ID>",
+      "command": "gcloud container clusters get-credentials smart-sales-test --region us-east1 --project smart-sales-464807",
       "problemMatcher": [],
       "group": "build"
     },
     {
       "label": "kubectl get pods",
       "type": "shell",
-      "command": "kubectl get pods",
+      "command": "kubectl get pods --all-namespaces",
       "problemMatcher": [],
       "group": "test"
+    },
+    {
+      "label": "Cluster Health Check",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/daily-health-check.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Cluster Health Check (Verbose)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/daily-health-check.sh --verbose",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Cluster Dashboard",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/cluster-dashboard.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": "test",
+      "isBackground": false
+    },
+    {
+      "label": "Cluster Dashboard (Auto-refresh)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/cluster-dashboard.sh --refresh=5",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": "test",
+      "isBackground": true
+    },
+    {
+      "label": "Setup Health Monitoring",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/setup-health-monitoring.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "View Latest Health Report",
+      "type": "shell",
+      "command": "ls -la reports/ && echo '---' && cat $(ls -t reports/health-check-*.txt | head -1)",
+      "options": {
+        "cwd": "${workspaceFolder}/scripts"
+      },
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "kubectl get services",
+      "type": "shell",
+      "command": "kubectl get services --all-namespaces -o wide",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "kubectl get deployments",
+      "type": "shell",
+      "command": "kubectl get deployments --all-namespaces",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Scale Production App",
+      "type": "shell",
+      "command": "kubectl scale deployment react-app --replicas=${input:replicas}",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Scale Testing App",
+      "type": "shell",
+      "command": "kubectl scale deployment react-caf-testing --replicas=${input:replicas} -n testing",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Restart Production App",
+      "type": "shell",
+      "command": "kubectl rollout restart deployment react-app",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Restart Testing App",
+      "type": "shell",
+      "command": "kubectl rollout restart deployment react-caf-testing -n testing",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "View Cluster Events",
+      "type": "shell",
+      "command": "kubectl get events --all-namespaces --sort-by=.metadata.creationTimestamp | tail -20",
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "replicas",
+      "type": "promptString",
+      "description": "Number of replicas"
     }
   ]
 }

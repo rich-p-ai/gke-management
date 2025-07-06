@@ -1,0 +1,75 @@
+========================================
+GKE Cluster Health Check Report
+Date: Sun Jul  6 17:14:56 AST 2025
+Cluster: smart-sales-test (us-east1)
+Project: smart-sales-464807
+========================================
+
+[0;34m[INFO][0m Starting GKE cluster health check...
+[0;34m[INFO][0m Checking authentication and cluster connection...
+[0;32m[SUCCESS][0m Authentication and cluster connection verified
+[0;34m[INFO][0m Checking cluster status...
+[0;32m[SUCCESS][0m Cluster status: RUNNING
+[0;32m[SUCCESS][0m All nodes ready: 3/3
+[0;34m[INFO][0m Checking deployment: react-app (namespace: default)
+[0;32m[SUCCESS][0m Deployment react-app: 2/2 replicas ready
+[0;32m[SUCCESS][0m All pods running: 2/2
+[0;34m[INFO][0m Checking service: react-app-service (namespace: default)
+[0;32m[SUCCESS][0m Service react-app-service: External IP 34.139.79.66
+[0;32m[SUCCESS][0m HTTP connectivity test passed for 34.139.79.66
+[0;34m[INFO][0m Checking deployment: react-caf-testing (namespace: testing)
+[0;32m[SUCCESS][0m Deployment react-caf-testing: 2/2 replicas ready
+[0;32m[SUCCESS][0m All pods running: 2/2
+[0;34m[INFO][0m Checking service: react-caf-testing-service (namespace: testing)
+[0;32m[SUCCESS][0m Service react-caf-testing-service: External IP 34.148.35.101
+[0;32m[SUCCESS][0m HTTP connectivity test passed for 34.148.35.101
+[0;34m[INFO][0m Checking resource usage...
+Node Resource Usage:
+NAME                                              CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+gke-smart-sales-test-default-pool-19b61010-0rqm   89m          9%       1075Mi          38%         
+gke-smart-sales-test-default-pool-364c6a73-tnt0   87m          9%       1119Mi          39%         
+gke-smart-sales-test-default-pool-69391c05-91m9   89m          9%       1156Mi          41%         
+
+Pod Resource Usage (Top 10):
+NAMESPACE         NAME                                                         CPU(cores)   MEMORY(bytes)   
+kube-system       fluentbit-gke-7zvfj                                          11m          46Mi            
+gmp-system        collector-frkhq                                              10m          82Mi            
+kube-system       fluentbit-gke-2rqzj                                          9m           45Mi            
+kube-system       fluentbit-gke-d6g2g                                          8m           53Mi            
+gmp-system        collector-rpwfs                                              8m           69Mi            
+gmp-system        collector-lc5s5                                              8m           81Mi            
+kube-system       pdcsi-node-7sjzn                                             7m           12Mi            
+kube-system       pdcsi-node-l7bpf                                             7m           12Mi            
+kube-system       konnectivity-agent-b9cc844b-dlxgt                            6m           26Mi            
+kube-system       pdcsi-node-5gl9x                                             6m           12Mi            
+
+[0;34m[INFO][0m Checking for resource-constrained pods...
+[0;32m[SUCCESS][0m No resource-constrained pods found
+[0;34m[INFO][0m Checking recent cluster events...
+Recent Events (Last 2 hours):
+NAMESPACE   LAST SEEN   TYPE      REASON                     OBJECT                                                 MESSAGE
+
+[1;33m[WARNING][0m Recent warning events found
+Warning Events:
+NAMESPACE   LAST SEEN   TYPE      REASON                     OBJECT                                                 MESSAGE
+default     11m         Warning   FailedScheduling           pod/react-app-75b5b57687-td4pw                         running Bind plugin "DefaultBinder": pods "react-app-75b5b57687-td4pw" not found
+default     11m         Warning   Failed                     pod/react-app-75b5b57687-kpg5l                         Failed to pull image "us-central1-docker.pkg.dev/smart-sales-464807/gke-react-test-app/react-app:latest": rpc error: code = NotFound desc = failed to pull and unpack image "us-central1-docker.pkg.dev/smart-sales-464807/gke-react-test-app/react-app:latest": failed to resolve reference "us-central1-docker.pkg.dev/smart-sales-464807/gke-react-test-app/react-app:latest": us-central1-docker.pkg.dev/smart-sales-464807/gke-react-test-app/react-app:latest: not found
+default     11m         Warning   Failed                     pod/react-app-75b5b57687-kpg5l                         Error: ErrImagePull
+default     90s         Warning   ReadOnlyLocalSSDDetected   node/gke-smart-sales-test-default-pool-364c6a73-tnt0   
+default     78s         Warning   ReadOnlyLocalSSDDetected   node/gke-smart-sales-test-default-pool-69391c05-91m9   
+default     72s         Warning   ReadOnlyLocalSSDDetected   node/gke-smart-sales-test-default-pool-19b61010-0rqm   
+
+[0;34m[INFO][0m Generating health check summary...
+
+========================================
+HEALTH CHECK SUMMARY
+========================================
+Errors: 0
+0
+Warnings: 1
+Successes: 12
+
+OVERALL STATUS: ISSUES DETECTED ❌
+[0;31m[ERROR][0m Cluster health check completed - Critical issues detected
+Report saved to: ./reports/health-check-2025-07-06_17-14-56.txt
+[0;34m[INFO][0m Health check complete. Report saved to: ./reports/health-check-2025-07-06_17-14-56.txt
