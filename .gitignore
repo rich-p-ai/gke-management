@@ -1,0 +1,11 @@
+# Sensitive files that should not be committed to public repositories
+github-actions-key.json
+*.key
+*.json
+!package*.json
+*.pem
+*.p12
+*.pfx
+credentials/
+secrets/
+gke-react-test-app/
